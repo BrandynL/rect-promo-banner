@@ -26,7 +26,7 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if (!defined('WPINC')) {
 	die;
 }
 
@@ -35,14 +35,15 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'REACT_PROMO_BANNER_VERSION', '1.0.0' );
+define('REACT_PROMO_BANNER_VERSION', '1.0.0');
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-react-promo-banner-activator.php
  */
-function activate_react_promo_banner() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-react-promo-banner-activator.php';
+function activate_react_promo_banner()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-react-promo-banner-activator.php';
 	React_Promo_Banner_Activator::activate();
 }
 
@@ -50,19 +51,20 @@ function activate_react_promo_banner() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-react-promo-banner-deactivator.php
  */
-function deactivate_react_promo_banner() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-react-promo-banner-deactivator.php';
+function deactivate_react_promo_banner()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-react-promo-banner-deactivator.php';
 	React_Promo_Banner_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_react_promo_banner' );
-register_deactivation_hook( __FILE__, 'deactivate_react_promo_banner' );
+register_activation_hook(__FILE__, 'activate_react_promo_banner');
+register_deactivation_hook(__FILE__, 'deactivate_react_promo_banner');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-react-promo-banner.php';
+require plugin_dir_path(__FILE__) . 'includes/class-react-promo-banner.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,10 +75,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-react-promo-banner.php';
  *
  * @since    1.0.0
  */
-function run_react_promo_banner() {
+function run_react_promo_banner()
+{
 
 	$plugin = new React_Promo_Banner();
 	$plugin->run();
-
 }
 run_react_promo_banner();

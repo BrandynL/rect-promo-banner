@@ -1,10 +1,9 @@
-(function($) {
-	const App = () => 'Hello World!!!';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { App } from './App';
 
+(function($) {
 	document.addEventListener('DOMContentLoaded', function() {
-		wp.element.render(
-			<App />,
-			document.getElementById('react-promo-banner'),
-		);
+		ReactDOM.render(<App />, document.getElementById('react-promo-banner'));
 	});
 })(jQuery);

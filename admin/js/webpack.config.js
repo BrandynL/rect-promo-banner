@@ -10,20 +10,6 @@ module.exports = {
 					loader: 'babel-loader',
 				},
 			},
-			{
-				test: /\.html$/,
-				use: [
-					{
-						loader: 'html-loader',
-					},
-				],
-			},
 		],
 	},
-	// plugins: [
-	// 	new HtmlWebPackPlugin({
-	// 		template: './src/index.html',
-	// 		filename: './index.html',
-	// 	}),
-	// ],
 };

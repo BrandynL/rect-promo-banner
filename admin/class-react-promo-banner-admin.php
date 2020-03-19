@@ -20,7 +20,8 @@
  * @subpackage React_Promo_Banner/admin
  * @author     Brandyn Lordi <brandyn.lordi@gmail.com>
  */
-class React_Promo_Banner_Admin {
+class React_Promo_Banner_Admin
+{
 
 	/**
 	 * The ID of this plugin.
@@ -47,11 +48,11 @@ class React_Promo_Banner_Admin {
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version)
+	{
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
 	}
 
 	/**
@@ -59,7 +60,8 @@ class React_Promo_Banner_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -73,8 +75,8 @@ class React_Promo_Banner_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/react-promo-banner-admin.css', array(), $this->version, 'all' );
-
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/react-promo-banner-admin.css', array(), $this->version, 'all');
+		wp_enqueue_style($this->plugin_name . 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -82,7 +84,8 @@ class React_Promo_Banner_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -96,8 +99,28 @@ class React_Promo_Banner_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/react-promo-banner-admin.js', array( 'jquery' ), $this->version, false );
-
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/dist/main.js', ['jquery', 'wp-element'], $this->version, false);
 	}
 
+	/**
+	 * Register a custom menu page.
+	 */
+	public function react_promo_banner_custom_menu_page()
+	{
+		add_menu_page(
+			__('Promo Banner', 'textdomain'),
+			'React Promo Banner',
+			'manage_options',
+			$this->plugin_name,
+			'react_promo_banner_admin_display',
+			'none',
+			6
+		);
+
+		function react_promo_banner_admin_display()
+		{
+			require('partials/react-promo-banner-admin-display.php');
+		}
+		// add_action('admin_menu', 'react_promo_banner_custom_menu_page', 11);
+	}
 }
