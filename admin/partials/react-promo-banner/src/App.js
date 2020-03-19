@@ -31,9 +31,9 @@ export const App = () => {
 			expire: '',
 		},
 		colors: {
-			background: 'black',
-			headline: 'white',
-			description: 'white',
+			background: '#000000',
+			headline: '#ffffff',
+			description: '#ffffff',
 		},
 		urlExclusions: [],
 		disabled: false,
@@ -49,9 +49,8 @@ export const App = () => {
 		disabled,
 	} = banner;
 
-	const onChange = (obj, e) => {
-		console.log(e.target.name, obj);
-		setbanner({ ...banner, [e.target.name]: obj });
+	const onChange = (value, e) => {
+		setbanner({ ...banner, [e.target.name]: value });
 	};
 
 	return (
@@ -75,7 +74,10 @@ export const App = () => {
 			<Row>
 				<Col md={8}>
 					<Form>
-						{/* <BannerDisabled /> */}
+						<BannerDisabled
+							disabled={disabled}
+							onChange={onChange}
+						/>
 						<BannerHeadline
 							headline={headline}
 							onChange={onChange}
@@ -87,7 +89,10 @@ export const App = () => {
 						<BannerTimes times={times} onChange={onChange} />
 						<BannerLink link={link} onChange={onChange} />
 						<BannerColors colors={colors} onChange={onChange} />
-						{/* <UrlExclusions /> */}
+						<UrlExclusions
+							urlExclusions={urlExclusions}
+							onChange={onChange}
+						/>
 					</Form>
 				</Col>
 				<Col md={4}>ad</Col>

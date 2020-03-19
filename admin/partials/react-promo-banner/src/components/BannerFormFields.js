@@ -157,8 +157,15 @@ export const BannerColors = ({ colors, onChange }) => {
 
 export const UrlExclusions = ({ urlExclusions, onChange }) => {
 	const [show, setshow] = useState(false);
+	const [exclusion, setexclusion] = useState('');
+	const handleSubmit = e => {
+		console.log(e);
+		e.preventDefault();
+		setexclusion('');
+		onChange(urlExclusions.unshift(exclusion), e);
+	};
 	return (
-		<Form.Group>
+		<div>
 			<Button
 				variant='link'
 				className='small'
@@ -169,13 +176,22 @@ export const UrlExclusions = ({ urlExclusions, onChange }) => {
 			<Modal centered show={show} onHide={() => setshow(false)}>
 				<Modal.Header closeButton>URL Exclusions</Modal.Header>
 				<Modal.Body>
-					<Form.Label>Add New Exclusion</Form.Label>
-					<InputGroup>
-						<Form.Control type='text' />
-						<InputGroup.Append>
-							<Button>Add</Button>
-						</InputGroup.Append>
-					</InputGroup>
+					<Form onSubmit={e => handleSubmit(e)}>
+						<Form.Group>
+							<Form.Label>Add New Exclusion</Form.Label>
+							<InputGroup>
+								<Form.Control
+									type='text'
+									placeholder='page url contains exact string'
+									onChange={e => setexclusion(e.target.value)}
+									value={exclusion}
+								/>
+								<InputGroup.Append>
+									<Button type='submit'>Add</Button>
+								</InputGroup.Append>
+							</InputGroup>
+						</Form.Group>
+					</Form>
 					<ListGroup>
 						{urlExclusions.map((url, index) => {
 							return (
@@ -187,14 +203,23 @@ export const UrlExclusions = ({ urlExclusions, onChange }) => {
 					</ListGroup>
 				</Modal.Body>
 			</Modal>
-		</Form.Group>
+		</div>
 	);
 };
 
-export const BannerDisabled = () => {
+export const BannerDisabled = ({ disabled, onChange }) => {
 	return (
 		<Form.Group>
-			<Form.Check inline type='checkbox' label='Disable Banner?' />
+			<Form.Check
+				name='disabled'
+				onChange={e => {
+					onChange(!disabled, e);
+				}}
+				checked={disabled}
+				inline
+				type='checkbox'
+				label='Disable Banner?'
+			/>
 		</Form.Group>
 	);
 };
