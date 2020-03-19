@@ -10,31 +10,50 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 export const BannerHeadline = ({ headline, onChange }) => {
+	const maxLength = 60;
 	return (
 		<Form.Group>
 			<Form.Label>Banner Headline</Form.Label>
 			<Form.Control
 				name='headline'
 				onChange={e => onChange({ text: e.target.value }, e)}
-				maxlength={90}
+				maxlength={60}
 				type='text'
 				value={headline.text}
 			/>
+			<span
+				className='small'
+				style={{
+					color: headline.text.length < maxLength ? 'green' : 'red',
+				}}
+			>
+				{headline.text.length} / {maxLength}
+			</span>
 		</Form.Group>
 	);
 };
 
 export const BannerDescription = ({ description, onChange }) => {
+	const maxLength = 90;
 	return (
 		<Form.Group>
 			<Form.Label>Banner Description</Form.Label>
 			<Form.Control
 				name='description'
 				onChange={e => onChange({ text: e.target.value }, e)}
-				maxlength={180}
+				maxlength={maxLength}
 				as='textarea'
 				value={description.text}
 			/>
+			<span
+				className='small'
+				style={{
+					color:
+						description.text.length < maxLength ? 'green' : 'red',
+				}}
+			>
+				{description.text.length} / {maxLength}
+			</span>
 		</Form.Group>
 	);
 };

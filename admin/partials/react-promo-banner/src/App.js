@@ -13,6 +13,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { BannerPreview } from './components/BannerPreview';
+
+import { updateOptions } from './functions/functions.js';
 
 export const App = () => {
 	const [banner, setbanner] = useState({
@@ -54,12 +58,12 @@ export const App = () => {
 	};
 
 	return (
-		<Container className='py-5'>
+		<Container className='py-5 my-3'>
 			<Row>
 				<Col>
 					<h1>Promo Banner</h1>
 					<p>
-						By
+						By{' '}
 						<a
 							href='https://brandynlordi.com/'
 							target='_blank'
@@ -72,8 +76,13 @@ export const App = () => {
 				</Col>
 			</Row>
 			<Row>
+				<Col>
+					<BannerPreview banner={banner} />
+				</Col>
+			</Row>
+			<Row>
 				<Col md={8}>
-					<Form>
+					<Form className='border rounded p-3'>
 						<BannerDisabled
 							disabled={disabled}
 							onChange={onChange}
@@ -93,9 +102,15 @@ export const App = () => {
 							urlExclusions={urlExclusions}
 							onChange={onChange}
 						/>
+						<Button
+							className='float-right'
+							onClick={() => updateOptions(banner)}
+						>
+							Update Banner Options
+						</Button>
 					</Form>
 				</Col>
-				<Col md={4}>ad</Col>
+				<Col md={4}>"reserved space"</Col>
 			</Row>
 		</Container>
 	);
